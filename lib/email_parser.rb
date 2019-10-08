@@ -1,14 +1,15 @@
 class EmailParser
-  attr_accessor :name, :csv_emails
 
-  def initialize(csv_emails)
-    @csv_emails = csv_emails
+attr_accessor :emails
+
+  def initialize(emails)
+    @emails = emails
   end
 
   def parse
-    @csv_emails.split.collect do |address|
-      address.split(',')
+      seperated_emails = @emails.split(/[ ,]/)
+      unique_emails = seperated_emails.uniq
+      unique_emails.reject {|email| email.empty?}
     end
-    .flatten.uniq
-  end
+
 end
